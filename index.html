@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABHI CODER – Electrical & Electronics Engineering Hub</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3f8;--card:#fff;--ink:#0d2038;--mute:#5b6b80;--line:#d9e2ec;--brand:#0b5fff;--amber:#f5a300;--teal:#0fa88a;--r:18px}
+*{box-sizing:border-box;margin:0}
+body{font-family:Figtree,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;min-height:100vh;
+background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:36px 36px;background-attachment:fixed}
+h1,h2,h3,.logo b{font-family:'Bricolage Grotesque',sans-serif;line-height:1.15}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.hidden{display:none!important}
+/* auth */
+#auth{min-height:100vh;display:grid;place-items:center;padding:20px}
+.authbox{background:var(--card);border-radius:24px;padding:34px;width:min(430px,100%);box-shadow:0 20px 60px #0d203826;border-top:6px solid var(--amber)}
+.authbox h1{font-size:2rem;margin:8px 0 4px}
+.authbox p{color:var(--mute);margin-bottom:18px}
+.tabs{display:flex;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:16px}
+.tabs button{flex:1;border:0;background:none;padding:10px;border-radius:9px;cursor:pointer;font-weight:600;color:var(--mute)}
+.tabs button.on{background:var(--ink);color:#fff}
+label{display:block;font-weight:600;font-size:.9rem;margin:12px 0 5px}
+input,select,textarea{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff}
+.btn{border:0;background:var(--brand);color:#fff;padding:12px 20px;border-radius:12px;font-weight:600;cursor:pointer;width:100%;margin-top:18px;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.err{color:#c0262d;font-size:.9rem;margin-top:10px;min-height:1.2em}
+/* app */
+nav{position:sticky;top:12px;z-index:10;margin:12px auto;max-width:1180px;background:#fffffff2;backdrop-filter:blur(8px);border-radius:999px;padding:8px 14px 8px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 6px 24px #0d20381a}
+.logo{display:flex;flex-direction:column;line-height:1.1;margin-right:auto}
+.logo b{font-size:1.25rem}.logo small{color:var(--mute);font-size:.72rem}
+.links{display:flex;gap:2px;overflow-x:auto}
+.links button{border:0;background:none;padding:8px 13px;border-radius:999px;cursor:pointer;font-weight:600;color:var(--mute);white-space:nowrap}
+.links button.on{background:var(--ink);color:#fff}
+.who{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--mute)}
+.who button{border:1.5px solid var(--line);background:none;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:10px 14px 50px}
+.panel{background:#ffffffe6;border-radius:26px;padding:28px;margin-bottom:22px;border:1px solid var(--line)}
+.hero h1{font-size:clamp(2rem,5vw,3.6rem);max-width:15ch}
+.hero p{color:var(--mute);max-width:56ch;margin:14px 0 20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 15px;font-weight:600;font-size:.9rem;cursor:pointer}
+.chip b{color:var(--brand)}
+.chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.bar input{flex:2;min-width:180px}.bar select{flex:1;min-width:140px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.thumb{height:130px;display:grid;place-items:center;font-size:3rem;color:#fff}
+.body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.meta{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.78rem;background:#e8f0ff;color:#1747b8;padding:3px 10px;border-radius:999px;font-weight:600}
+.tag.g{background:#e0f6f0;color:#0a7a64}
+.card h3{font-size:1.08rem}.card p{color:var(--mute);font-size:.93rem;flex:1}
+.link{align-self:flex-start;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 15px;font-weight:600;cursor:pointer;text-decoration:none;color:var(--ink);font-size:.9rem}
+.link:hover{border-color:var(--brand);color:var(--brand)}
+.sec-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.sec-h h2{font-size:1.6rem}
+.count{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:3px 12px;color:var(--mute)}
+.fact{cursor:pointer;text-align:left}.fact .ans{display:none;color:var(--ink);font-size:.93rem;border-top:1px dashed var(--line);padding-top:8px}
+.fact.open .ans{display:block}.fact .hint{color:var(--brand);font-weight:600;font-size:.85rem}
+dialog{border:0;border-radius:22px;padding:28px;width:min(680px,92vw);max-height:85vh;box-shadow:0 30px 80px #0d203866}
+dialog::backdrop{background:#0d203899}
+dialog pre{background:#0d2038;color:#d6e4ff;padding:14px;border-radius:12px;overflow:auto;margin:12px 0;font-size:.85rem}
+dialog h2{margin-bottom:8px}dialog p{margin:8px 0}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:760px){.contact{grid-template-columns:1fr}nav{border-radius:22px;flex-wrap:wrap}.who span{display:none}}
+footer{text-align:center;color:var(--mute);font-size:.88rem;padding:10px 14px 40px}
+footer a{color:var(--brand);font-weight:600}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- AUTH GATE -->
+<section id="auth">
+  <div class="authbox">
+    <div class="logo"><b style="font-size:1.6rem">⚡ Coader</b><small>Electrical & Electronics Engineering Hub</small></div>
+    <h1 id="authTitle">Welcome back</h1>
+    <p>Sign in or create an account to open the learning hub.</p>
+    <div class="tabs" role="tablist">
+      <button id="tIn" class="on" type="button">Sign in</button>
+      <button id="tUp" type="button">Sign up</button>
+    </div>
+    <div id="nameRow" class="hidden"><label for="aName">Full name</label><input id="aName" autocomplete="name"></div>
+    <label for="aMail">Email</label><input id="aMail" type="email" autocomplete="email">
+    <label for="aPass">Password (min 6 characters)</label><input id="aPass" type="password" autocomplete="current-password">
+    <div class="err" id="aErr" role="alert"></div>
+    <button class="btn" id="aGo" type="button">Sign in</button>
+  </div>
+</section>
+
+<!-- APP -->
+<div id="app" class="hidden">
+<nav>
+  <div class="logo"><b>⚡ Coader</b><small id="navSub">EEE Learning Hub</small></div>
+  <div class="links" id="links"></div>
+  <div class="who"><span id="uName"></span><button id="out" type="button">Sign out</button></div>
+</nav>
+<main id="view"></main>
+<footer>
+  Built for Electrical & Electronics Engineering students · Support: <a href="mailto:amarjeetkumartiwari219@gmail.com">amarjeetkumartiwari219@gmail.com</a><br>© 2026 Coader. All rights reserved.
+</footer>
+</div>
+
+<dialog id="dlg"><div id="dBody"></div><button class="link" style="margin-top:14px" onclick="dlg.close()">Close</button></dialog>
+
+<script>
+const EMAIL="amarjeetkumartiwari219@gmail.com";
+/* ---------- DATA (EEE only) ---------- */
+const D={
+articles:[
+{t:"Ohm's Law and Kirchhoff's Laws Explained",c:"Circuit Theory",m:"6 min",e:"🔌",s:"The three laws behind every circuit analysis problem.",b:"<p><b>Ohm's Law:</b> V = I × R. Voltage across a resistor is proportional to the current through it.</p><p><b>KCL:</b> The sum of currents entering a node equals the sum leaving it.</p><p><b>KVL:</b> The sum of voltages around any closed loop is zero.</p><pre>Example: 12 V source, R1 = 4Ω, R2 = 2Ω in series\nI = 12 / (4+2) = 2 A\nV(R1) = 8 V, V(R2) = 4 V</pre>"},
+{t:"Three-Phase Power Systems for Beginners",c:"Power Systems",m:"8 min",e:"⚡",s:"Why the grid uses three phases, and how star and delta connections differ.",b:"<p>Three-phase supply uses three voltages 120° apart. It delivers constant power and needs less copper than single-phase.</p><pre>Star:  V_line = √3 × V_phase,  I_line = I_phase\nDelta: V_line = V_phase,       I_line = √3 × I_phase\nP = √3 × V_L × I_L × cos φ</pre>"},
+{t:"How a DC Motor Works",c:"Electrical Machines",m:"7 min",e:"⚙️",s:"Back EMF, torque and speed control in simple steps.",b:"<p>A current-carrying conductor in a magnetic field feels a force. In a DC motor, the commutator keeps torque in one direction.</p><pre>Torque: T = k × Φ × Ia\nBack EMF: Eb = k × Φ × N\nSpeed: N ∝ (V − Ia·Ra) / Φ</pre><p>Speed is controlled by armature voltage or field flux.</p>"},
+{t:"Transformer Basics: Working, EMF Equation and Losses",c:"Electrical Machines",m:"7 min",e:"🧲",s:"Turns ratio, EMF equation, copper and iron losses.",b:"<p>A transformer transfers power between circuits by mutual induction.</p><pre>E = 4.44 × f × N × Φm\nV1/V2 = N1/N2 = I2/I1\nEfficiency = Output / (Output + Cu loss + Iron loss)</pre>"},
+{t:"Op-Amp Basics: Inverting and Non-Inverting Amplifiers",c:"Analog Electronics",m:"6 min",e:"📈",s:"Ideal op-amp rules and gain formulas you must remember.",b:"<p>Ideal op-amp: infinite gain, infinite input impedance, zero output impedance, and a virtual short between inputs.</p><pre>Inverting:     Av = −Rf / Rin\nNon-inverting: Av = 1 + Rf / Rin</pre>"},
+{t:"Logic Gates and Boolean Algebra",c:"Digital Electronics",m:"5 min",e:"🔢",s:"AND, OR, NOT, NAND, NOR, XOR and why NAND is universal.",b:"<p>NAND and NOR are universal gates: any logic function can be built using only one of them.</p><pre>De Morgan: (A·B)' = A' + B'\n          (A+B)' = A'·B'\nXOR: A ⊕ B = A'B + AB'</pre>"}],
+tips:[
+{t:"Always discharge capacitors before touching a circuit",c:"Safety",m:"2 min",e:"🛡️",s:"Large capacitors can hold a dangerous charge long after power-off.",b:"<p>Use a resistor (about 1 kΩ, 5 W) across the terminals to discharge safely. Confirm with a multimeter before touching.</p>"},
+{t:"Use the colour code to read resistors fast",c:"Components",m:"3 min",e:"🎨",s:"Black, Brown, Red, Orange, Yellow, Green, Blue, Violet, Grey, White = 0 to 9.",b:"<p>First two bands are digits, third is multiplier, fourth is tolerance. Brown-Black-Red-Gold = 10 × 100 = 1 kΩ ±5%.</p>"},
+{t:"Check polarity on electrolytic capacitors",c:"Components",m:"2 min",e:"🔋",s:"Reverse polarity can make them heat up or burst.",b:"<p>The stripe marks the negative lead. The longer lead is positive on a new part.</p>"},
+{t:"Add a flyback diode across relays and motors",c:"Circuit Design",m:"3 min",e:"🔁",s:"Protects your transistor from inductive voltage spikes.",b:"<p>Place a diode (e.g. 1N4007) in reverse across the coil. It gives the collapsing current a safe path.</p>"}],
+facts:[
+{t:"Nikola Tesla's AC won the 'War of Currents'",c:"History",e:"💡",s:"AC beat DC for long-distance power.",b:"AC can be stepped up by transformers to high voltage, cutting losses over long lines. That is why grids use AC."},
+{t:"India's grid frequency is 50 Hz",c:"Power Systems",e:"🇮🇳",s:"The US uses 60 Hz.",b:"India runs at 50 Hz nominal, with a normal operating band around 49.9 to 50.05 Hz."},
+{t:"The first transistor was built in 1947",c:"Electronics",e:"🔬",s:"Bell Labs, a point-contact device.",b:"Bardeen, Brattain and Shockley at Bell Labs created it. It replaced bulky vacuum tubes."},
+{t:"HVDC can be cheaper than AC on very long lines",c:"Power Systems",e:"🌐",s:"Beyond a break-even distance, DC wins.",b:"No reactive power losses and fewer conductors make HVDC attractive for lines of roughly 600 km or more overhead."},
+{t:"A modern CPU has billions of transistors",c:"Electronics",e:"🧠",s:"Moore's law in practice.",b:"Chips are built on nanometre-scale processes with transistor counts in the tens of billions."}],
+projects:[
+{t:"Automatic Street Light using LDR",c:"Beginner",tech:"Arduino, LDR, Relay",e:"🌙",s:"Light turns ON at dusk and OFF at dawn automatically.",b:"<p><b>Parts:</b> Arduino Uno, LDR, 10 kΩ resistor, relay module, lamp.</p><pre>int ldr = A0;\nvoid setup(){ pinMode(8, OUTPUT); }\nvoid loop(){\n  int v = analogRead(ldr);\n  digitalWrite(8, v < 400 ? HIGH : LOW);\n  delay(200);\n}</pre><p>Tune the 400 threshold for your room.</p>"},
+{t:"Digital Voltmeter with Arduino",c:"Intermediate",tech:"Arduino, Voltage divider, LCD",e:"📟",s:"Measure up to 25 V using a resistor divider.",b:"<p>Use R1 = 30 kΩ and R2 = 7.5 kΩ so 25 V maps to 5 V at A0.</p><pre>float v = analogRead(A0) * (5.0/1023.0) * 5.0;\nlcd.print(v);</pre><p>Never exceed 5 V at the Arduino pin.</p>"},
+{t:"Transformerless 5 V Power Supply Simulation",c:"Intermediate",tech:"LTspice, Multisim",e:"🔧",s:"Simulate rectifier, filter and regulator stages.",b:"<p>Build a bridge rectifier, 1000 µF filter capacitor and a 7805 regulator in LTspice. Plot ripple voltage and compute regulation.</p>"}],
+resources:[
+{t:"All About Circuits",c:"Website",e:"🔗",u:"https://www.allaboutcircuits.com",s:"Free textbooks, tutorials and forums for electronics."},
+{t:"NPTEL – Electrical Engineering",c:"Course",e:"🎓",u:"https://nptel.ac.in",s:"Free IIT/IISc video courses with certification."},
+{t:"Electronics Tutorials",c:"Website",e:"🔗",u:"https://www.electronics-tutorials.ws",s:"Beginner-friendly explanations of circuits and devices."},
+{t:"LTspice Simulator",c:"Tool",e:"🧪",u:"https://www.analog.com/ltspice",s:"Free circuit simulator from Analog Devices."},
+{t:"Tinkercad Circuits",c:"Tool",e:"🛠️",u:"https://www.tinkercad.com/circuits",s:"Browser-based Arduino and circuit simulation."},
+{t:"Falstad Circuit Simulator",c:"Tool",e:"📉",u:"https://www.falstad.com/circuit/",s:"Interactive real-time circuit animations."}]
+};
+const COL=["#0b5fff","#7a3cff","#0fa88a","#e0701a","#c0267d","#2a7fb8"];
+const TABS=["Home","Articles","Tips","Facts","Projects","Resources","Contact"];
+const $=id=>document.getElementById(id);
+const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+
+/* ---------- AUTH ---------- */
+let mode="in";
+function setMode(m){mode=m;$("tIn").classList.toggle("on",m==="in");$("tUp").classList.toggle("on",m==="up");
+ $("nameRow").classList.toggle("hidden",m==="in");$("aGo").textContent=m==="in"?"Sign in":"Create account";
+ $("authTitle").textContent=m==="in"?"Welcome back":"Create your account";$("aErr").textContent="";}
+$("tIn").onclick=()=>setMode("in");$("tUp").onclick=()=>setMode("up");
+async function hash(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+$("aGo").onclick=async()=>{
+ const mail=$("aMail").value.trim().toLowerCase(),pw=$("aPass").value,name=$("aName").value.trim(),users=get("coader_users",{});
+ if(!/^\S+@\S+\.\S+$/.test(mail))return $("aErr").textContent="Enter a valid email address.";
+ if(pw.length<6)return $("aErr").textContent="Password must be at least 6 characters.";
+ const h=await hash(pw);
+ if(mode==="up"){
+  if(!name)return $("aErr").textContent="Enter your full name.";
+  if(users[mail])return $("aErr").textContent="This email already has an account. Sign in instead.";
+  users[mail]={name,h};set("coader_users",users);
+ }else{
+  if(!users[mail]||users[mail].h!==h)return $("aErr").textContent="Wrong email or password. If you are new, use Sign up.";
+ }
+ set("coader_session",{mail,name:users[mail].name});enter();
+};
+[ "aMail","aPass","aName"].forEach(i=>$(i).addEventListener("keydown",e=>{if(e.key==="Enter")$("aGo").click()}));
+$("out").onclick=()=>{localStorage.removeItem("coader_session");location.reload()};
+
+function enter(){
+ const s=get("coader_session",null);
+ if(!s){$("auth").classList.remove("hidden");$("app").classList.add("hidden");return}
+ $("auth").classList.add("hidden");$("app").classList.remove("hidden");$("uName").textContent=s.name;
+ $("links").innerHTML=TABS.map(t=>`<button data-t="${t}">${t}</button>`).join("");
+ $("links").onclick=e=>{if(e.target.dataset.t)go(e.target.dataset.t)};
+ go(location.hash.slice(1)&&TABS.includes(location.hash.slice(1))?location.hash.slice(1):"Home");
+}
+
+/* ---------- VIEWS ---------- */
+let sortBy="new",q="",cat="All";
+function go(t){
+ location.hash=t;$("navSub").textContent=t==="Home"?"EEE Learning Hub":t;
+ document.querySelectorAll("#links button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));
+ q="";cat="All";sortBy="new";window.scrollTo(0,0);
+ if(t==="Home")return home();if(t==="Contact")return contact();list(t.toLowerCase());
+}
+function home(){
+ const n=k=>D[k].length;
+ $("view").innerHTML=`<section class="panel hero"><div class="tag" style="display:inline-block;margin-bottom:14px">Hello, ${esc(get("coader_session").name.split(" ")[0])}</div>
+ <h1>Learn electrical & electronics engineering, one circuit at a time.</h1>
+ <p>Articles, quick tips, facts, hands-on projects with code, and handpicked resources. Everything here is about EEE, nothing else.</p>
+ <div class="chips">${["Articles","Tips","Facts","Projects","Resources"].map(k=>`<button class="chip" data-g="${k}"><b>${n(k.toLowerCase())}</b> ${k}</button>`).join("")}</div></section>
+ <section class="panel"><div class="sec-h"><h2>Start here</h2><span class="count">Hand-picked</span></div><div class="grid">${D.articles.slice(0,3).map((x,i)=>card(x,"articles",i)).join("")}</div></section>`;
+ $("view").querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>go(b.dataset.g));bind();
+}
+function card(x,k,i){
+ const col=COL[i%COL.length];
+ let foot=k==="resources"?`<a class="link" href="${x.u}" target="_blank" rel="noopener">Visit resource ↗</a>`:
+  k==="facts"?`<span class="hint">Tap to reveal full fact</span><div class="ans">${x.b}</div>`:
+  `<button class="link" data-o="${k}:${i}">Read more</button>`;
+ return `<article class="card ${k==="facts"?"fact":""}" ${k==="facts"?'tabindex="0"':""}>
+ <div class="thumb" style="background:linear-gradient(135deg,${col},#0d2038)">${x.e}</div>
+ <div class="body"><div class="meta"><span class="tag g">${x.c}</span>${x.m?`<span class="tag">${x.m}</span>`:""}${x.tech?`<span class="tag">${x.tech}</span>`:""}</div>
+ <h3>${x.t}</h3><p>${x.s}</p>${foot}</div></article>`;
+}
+function list(k){
+ const cats=["All",...new Set(D[k].map(x=>x.c))];
+ $("view").innerHTML=`<section class="panel"><div class="bar"><input id="q" placeholder="Search ${k}…" aria-label="Search"><select id="so" aria-label="Sort"><option value="new">Newest first</option><option value="az">A to Z</option></select><select id="ct" aria-label="Category">${cats.map(c=>`<option>${c}</option>`).join("")}</select></div>
+ <div class="sec-h"><h2>All ${k[0].toUpperCase()+k.slice(1)}</h2><span class="count" id="cnt"></span></div><div class="grid" id="gr"></div></section>`;
+ const draw=()=>{let a=D[k].map((x,i)=>({x,i})).filter(o=>(cat==="All"||o.x.c===cat)&&(o.x.t+o.x.s+o.x.c).toLowerCase().includes(q));
+  if(sortBy==="az")a.sort((p,r)=>p.x.t.localeCompare(r.x.t));
+  $("cnt").textContent=a.length+" items";
+  $("gr").innerHTML=a.length?a.map(o=>card(o.x,k,o.i)).join(""):"<p>No match found. Try a different keyword or category.</p>";bind()};
+ $("q").oninput=e=>{q=e.target.value.toLowerCase();draw()};$("so").onchange=e=>{sortBy=e.target.value;draw()};$("ct").onchange=e=>{cat=e.target.value;draw()};draw();
+}
+function bind(){
+ document.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{const[k,i]=b.dataset.o.split(":"),x=D[k][i];
+  $("dBody").innerHTML=`<div class="meta"><span class="tag g">${x.c}</span>${x.m?`<span class="tag">${x.m}</span>`:""}${x.tech?`<span class="tag">${x.tech}</span>`:""}</div><h2 style="margin-top:10px">${x.t}</h2><p>${x.s}</p>${x.b}`;dlg.showModal()});
+ document.querySelectorAll(".fact").forEach(f=>{f.onclick=()=>f.classList.toggle("open");f.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();f.classList.toggle("open")}}});
+}
+function contact(){
+ const s=get("coader_session");
+ $("view").innerHTML=`<section class="panel contact"><div><h2 style="font-size:2rem">Full support</h2><p style="margin:12px 0;color:var(--mute)">Stuck on a topic, found a mistake, or want a new EEE topic added? Write to us and we will reply by email.</p>
+ <p><b>Email:</b> <a href="mailto:${EMAIL}" style="color:var(--brand);font-weight:600">${EMAIL}</a></p></div>
+ <div><label for="cs">Subject</label><input id="cs" placeholder="e.g. Doubt in transformer losses"><label for="cm">Message</label><textarea id="cm" rows="5"></textarea>
+ <button class="btn" id="cg" type="button">Send email</button><div class="err" id="ce"></div></div></section>`;
+ $("cg").onclick=()=>{const m=$("cm").value.trim();if(!m)return $("ce").textContent="Write your message first.";
+  location.href=`mailto:${EMAIL}?subject=${encodeURIComponent($("cs").value||"Coader support")}&body=${encodeURIComponent(m+"\n\n— "+s.name+" ("+s.mail+")")}`};
+}
+const esc=s=>s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dlg=$("dlg");
+enter();
+</script>
+</body>
+</html>
